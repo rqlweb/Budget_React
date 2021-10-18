@@ -15,7 +15,7 @@ const Form = ({ insertExpense, expenseStatus }) => {
 
         //Submit validate the Expense
 
-        if(amount < 1 || isNaN(amount) || name_expense.trim() == '') {
+        if(amount < 1 || isNaN(amount) || name_expense.trim() === '') {
             saveError(true);
             return;
         }
