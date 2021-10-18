@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Error from './Error';
-//import shortid from 'shortid';
+import PropTypes from 'prop-types';
+
 
 const Form = ({ insertExpense, expenseStatus }) => {
 
@@ -14,7 +15,7 @@ const Form = ({ insertExpense, expenseStatus }) => {
 
         //Submit validate the Expense
 
-        if(amount < 1 || isNaN( amount) || name_expense.trim() === '' ) {
+        if(amount < 1 || isNaN(amount) || name_expense.trim() == '') {
             saveError(true);
             return;
         }
@@ -67,7 +68,7 @@ const Form = ({ insertExpense, expenseStatus }) => {
                     className="u-full-width"
                     placeholder="Ej. 300"
                     value={amount}
-                    onChange={ e => saveAmount(parseInt(e.target.value, 10))}
+                    onChange={ e => saveAmount( parseInt(e.target.value, 10) )}
                 />
             </div>
 
@@ -80,6 +81,11 @@ const Form = ({ insertExpense, expenseStatus }) => {
         </form>
 
      );
+}
+
+Form.propTypes = {
+    insertExpense: PropTypes.func.isRequired,
+    expenseStatus: PropTypes.func.isRequired
 }
  
 export default Form;

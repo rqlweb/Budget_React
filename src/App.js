@@ -11,7 +11,7 @@ function App() {
   const [ remaining, saveRemaining ] = useState(0);
   const [ show_question, updateQuestion ] = useState(true);
   const [ expense_list, saveExpenseList ] = useState([]);
-  const [ expense, insertExpense] = useState({});
+  const [ expense, insertExpense] = useState({ });
   const [ new_expense, expenseStatus] = useState(false);
 
   //useEffect update the remaining
@@ -22,15 +22,17 @@ function App() {
         ...expense_list,
         expense
       ]);
+
+       //subtract the remainder from the budget
+      const remainingBudget = (remaining - expense.amount);
+      saveRemaining(remainingBudget);
+
+      //reset status
+      expenseStatus(false);
+
     }
-
-    //subtract the remainder from the budget
-    const remainingBudget = (remaining - expense.amount);
-    saveRemaining(remainingBudget);
-
-    //reset status
-    expenseStatus(false);
-  }, [expense, new_expense, expense_list]);
+    
+  }, [expense, new_expense, expense_list, remaining]);
  
 
   return (
@@ -56,15 +58,14 @@ function App() {
                     </div>
 
                     <div className="one-half column">
-                      <List
-                          expense_list={expense_list} 
-                        
-                      />
+                        <List
+                            expense_list={expense_list}    
+                        />
 
-                      <BudgetControl 
-                          budget={budget}
-                          remaining={remaining}
-                      />
+                        <BudgetControl 
+                            budget={budget}
+                            remaining={remaining}
+                        />
                     </div>
                   </div>
                 )

@@ -1,5 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 const Question = ({ saveBudget, saveRemaining, updateQuestion }) => {
 
@@ -9,7 +10,7 @@ const Question = ({ saveBudget, saveRemaining, updateQuestion }) => {
 
     //Funtion define number in budget
     const defineBudget = amount => {
-        saveQuantity( parseInt(amount.target.value, 10))
+        saveQuantity( parseInt(amount.target.value, 10));
     }
 
     //Submit validate the budget
@@ -33,7 +34,7 @@ const Question = ({ saveBudget, saveRemaining, updateQuestion }) => {
         <Fragment>
             <h2>Presupuesto</h2>
 
-            {error ? <Error  message="Presupuesto es Incorrecto"/> : null}    
+            {error ? <Error  message="Presupuesto Incorrecto"/> : null}    
 
             <form
                 onSubmit={addBudget}
@@ -53,6 +54,12 @@ const Question = ({ saveBudget, saveRemaining, updateQuestion }) => {
             </form>
         </Fragment>
      );
+}
+
+Question.propTypes = {
+    saveBudget: PropTypes.func.isRequired,
+    saveRemaining: PropTypes.func.isRequired,
+    updateQuestion: PropTypes.func.isRequired
 }
  
 export default Question;
